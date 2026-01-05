@@ -1,4 +1,4 @@
-# svelte5-prettier-eslint-advanced-lts
+# svelte5-prettier-eslint-npm-advanced-lts
 
 Base:
 ```bash
