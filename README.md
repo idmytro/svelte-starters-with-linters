@@ -1,1 +1,1 @@
-# svelte-linters
+# Svelte starters with linters
