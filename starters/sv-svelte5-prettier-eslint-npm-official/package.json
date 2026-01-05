@@ -1,7 +1,7 @@
 {
-	"name": "svelte5-prettier-eslint-official",
+	"name": "sv-svelte5-prettier-eslint-npm-official",
 	"private": true,
-	"version": "0.0.1",
+	"version": "2026.05.01",
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",

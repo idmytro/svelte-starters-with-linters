@@ -1,7 +1,7 @@
-# svelte5-prettier-eslint-official
+# svelte5-prettier-eslint-npm-official
 
 ```bash
 npx sv create --template minimal --types ts --add prettier eslint --install npm .
 ```
 
-version 05.01.2026
+version 2026.05.01
