@@ -5,89 +5,70 @@ import svelte from 'eslint-plugin-svelte';
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 import ts from 'typescript-eslint';
-import stylistic from '@stylistic/eslint-plugin'; // <--- Импортируем плагин
+import stylistic from '@stylistic/eslint-plugin';
 import svelteConfig from './svelte.config.js';
 
 const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
 
 export default defineConfig(
-    includeIgnoreFile(gitignorePath),
-    js.configs.recommended,
-    ...ts.configs.recommended,
-    ...svelte.configs['flat/recommended'], // Явно указываем flat config
+  includeIgnoreFile(gitignorePath),
+  js.configs.recommended,
+  ...ts.configs.recommended,
+  ...svelte.configs['flat/recommended'],
 
-    // === БЛОК 1: Настройка Stylistic (замена Prettier для JS/TS) ===
-    {
-        plugins: {
-            '@stylistic': stylistic,
-        },
-        rules: {
-            // Отступы: 4 пробела (можешь поменять на 2)
-            '@stylistic/indent': ['error', 4],
-
-            // Точки с запятой всегда
-            '@stylistic/semi': ['error', 'always'],
-
-            // Одинарные кавычки
-            '@stylistic/quotes': ['error', 'single', { avoidEscape: true }],
-
-            // Запятые в многострочных объектах/массивах
-            '@stylistic/comma-dangle': ['error', 'always-multiline'],
-
-            // Пробелы внутри фигурных скобок { foo }
-            '@stylistic/object-curly-spacing': ['error', 'always'],
-
-            // Убираем лишние пробелы в конце строк
-            '@stylistic/no-trailing-spaces': 'error',
-
-            // ВАЖНО: Мы НЕ включаем правило max-len, поэтому длина строки не ограничена
-        },
+  // === Stylistic (JS/TS форматирование) ===
+  {
+    plugins: {
+      '@stylistic': stylistic,
     },
+    rules: {
+      // ОТСТУПЫ: 2 ПРОБЕЛА
+      '@stylistic/indent': ['error', 2],
 
-    // === БЛОК 2: Настройка Svelte (HTML и атрибуты) ===
-    {
-        files: ['**/*.svelte'],
-        rules: {
-            // Отступы в HTML. Важно: число должно совпадать с JS (4)
-            'svelte/indent': ['error', { indent: 4 }],
+      // Остальные правила стиля
+      '@stylistic/semi': ['error', 'always'],
+      '@stylistic/quotes': ['error', 'single', { avoidEscape: true }],
+      '@stylistic/comma-dangle': ['error', 'always-multiline'],
+      '@stylistic/object-curly-spacing': ['error', 'always'],
+      '@stylistic/no-trailing-spaces': 'error',
 
-            // === СВОБОДА ОТ PRETTIER ===
-
-            // Отключаем принудительный перенос атрибутов.
-            // Теперь ты сам решаешь: всё в одну строку или лесенкой.
-            'svelte/max-attributes-per-line': 'off',
-
-            // Не требовать переноса закрывающей скобки >
-            'svelte/html-closing-bracket-new-line': 'off',
-
-            // Не требовать переноса первого атрибута
-            'svelte/first-attribute-linebreak': 'off',
-
-            // Разрешаем самозакрывающиеся теги, где угодно
-            'svelte/html-self-closing': 'off',
-        },
+      // Запрещаем принудительные переносы (нет max-len)
     },
+  },
 
-    // === БЛОК 3: Глобальные настройки (твои исходные) ===
-    {
-        languageOptions: { globals: { ...globals.browser, ...globals.node } },
+  // === Svelte (HTML форматирование) ===
+  {
+    files: ['**/*.svelte'],
+    rules: {
+      // ОТСТУПЫ В HTML: 2 ПРОБЕЛА (Синхронизировано с JS)
+      'svelte/indent': ['error', { indent: 2 }],
 
-        rules: {
-            'no-undef': 'off',
-        },
+      // Отключаем навязывание переносов атрибутов
+      'svelte/max-attributes-per-line': 'off',
+      'svelte/first-attribute-linebreak': 'off',
+      'svelte/html-closing-bracket-new-line': 'off',
+      'svelte/html-self-closing': 'off',
     },
+  },
 
-    // === БЛОК 4: Парсер для TypeScript в Svelte ===
-    {
-        files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
-
-        languageOptions: {
-            parserOptions: {
-                projectService: true,
-                extraFileExtensions: ['.svelte'],
-                parser: ts.parser,
-                svelteConfig,
-            },
-        },
+  // === Глобальные настройки ===
+  {
+    languageOptions: { globals: { ...globals.browser, ...globals.node } },
+    rules: {
+      'no-undef': 'off',
     },
+  },
+
+  // === TypeScript Parser для Svelte ===
+  {
+    files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        extraFileExtensions: ['.svelte'],
+        parser: ts.parser,
+        svelteConfig,
+      },
+    },
+  },
 );
