@@ -1,0 +1,18 @@
+{
+    "editor.formatOnSave": false, // Выключаем нативный форматтер
+    
+    // Настраиваем действия при сохранении
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit",    // ESLint чинит JS и HTML
+      "source.fixAll.stylelint": "explicit"  // Stylelint чинит CSS
+    },
+    
+    // Привязка валидации
+    "eslint.validate": ["javascript", "javascriptreact", "svelte"],
+    "stylelint.validate": ["css", "scss", "svelte"],
+    
+    // Убираем дефолтный форматтер для Svelte, чтобы не конфликтовал
+    "[svelte]": {
+      "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    }
+  }
