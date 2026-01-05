@@ -1,7 +1,7 @@
 {
-  "name": "vite-svelte-ts-npm",
+  "name": "vite-svelte-ts-npm-official",
   "private": true,
-  "version": "0.0.0",
+  "version": "2026.01.05",
   "type": "module",
   "scripts": {
     "dev": "vite",
