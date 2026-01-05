@@ -1,9 +1,10 @@
-// .prettierrc.mjs
-export default {
+import type { Config } from 'prettier';
+
+const config: Config = {
 	useTabs: true,
 	singleQuote: true,
 	trailingComma: 'none',
-	// printWidth: 100,
+	printWidth: 80,
 	plugins: ['prettier-plugin-svelte'],
 	overrides: [
 		{
@@ -14,3 +15,5 @@ export default {
 		}
 	]
 };
+
+export default config;
