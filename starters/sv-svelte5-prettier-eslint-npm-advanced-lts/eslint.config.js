@@ -1,11 +1,15 @@
-import prettier from 'eslint-config-prettier';
 import { fileURLToPath } from 'node:url';
+
 import { includeIgnoreFile } from '@eslint/compat';
 import js from '@eslint/js';
-import svelte from 'eslint-plugin-svelte';
 import { defineConfig } from 'eslint/config';
+import prettier from 'eslint-config-prettier';
+import importPlugin from 'eslint-plugin-import';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import svelte from 'eslint-plugin-svelte';
 import globals from 'globals';
 import ts from 'typescript-eslint';
+
 import svelteConfig from './svelte.config.js';
 
 const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
@@ -36,6 +40,37 @@ export default defineConfig(
 				parser: ts.parser,
 				svelteConfig
 			}
+		}
+	},
+	/* simple-import-sort */
+	{
+		plugins: {
+			'simple-import-sort': simpleImportSort
+		},
+		rules: {
+			'simple-import-sort/imports': 1
+		}
+	},
+	/* import */
+	{
+		plugins: {
+			import: importPlugin
+		},
+		settings: {
+			'import/resolver': {
+				typescript: {
+					project: './tsconfig.json',
+					alwaysTryTypes: true
+				}
+			}
+		},
+		rules: {
+			'import/no-unresolved': [
+				'error',
+				{
+					ignore: ['^\\$app', '^\\$env', '^\\$service-worker']
+				}
+			]
 		}
 	}
 );
