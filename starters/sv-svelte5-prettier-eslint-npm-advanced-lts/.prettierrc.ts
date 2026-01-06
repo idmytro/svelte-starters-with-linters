@@ -5,7 +5,11 @@ const config: Config = {
 	singleQuote: true,
 	trailingComma: 'none',
 	printWidth: undefined,
-	plugins: ['prettier-plugin-svelte', 'prettier-plugin-packagejson'],
+	plugins: [
+		'prettier-plugin-svelte',
+		'prettier-plugin-css-order',
+		'prettier-plugin-packagejson'
+	],
 	overrides: [
 		{
 			files: '*.svelte',
