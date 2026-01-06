@@ -1,18 +1,18 @@
 {
 	"name": "sv-svelte5-prettier-eslint-advanced-npm-lts",
-	"private": true,
 	"version": "2026.01.05",
+	"private": true,
 	"type": "module",
 	"scripts": {
-		"dev": "vite dev",
 		"build": "vite build",
-		"preview": "vite preview",
-		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"dev": "vite dev",
+		"eslint": "eslint .",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
-		"eslint": "eslint ."
+		"prepare": "svelte-kit sync || echo ''",
+		"preview": "vite preview"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.4.0",
@@ -30,6 +30,7 @@
 		"globals": "^16.5.0",
 		"prettier": "^3.7.4",
 		"prettier-plugin-css-order": "^2.2.0",
+		"prettier-plugin-packagejson": "^2.5.20",
 		"prettier-plugin-svelte": "^3.4.0",
 		"svelte": "^5.45.6",
 		"svelte-check": "^4.3.4",
