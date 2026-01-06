@@ -1,10 +1,11 @@
-import type { Config } from 'prettier';
+/* .prettierrc.ts */
 
-const config: Config = {
+/** @type {import('prettier').Config} */
+const config = {
 	useTabs: true,
 	singleQuote: true,
 	trailingComma: 'none',
-	printWidth: undefined,
+	printWidth: 80 /* default */,
 	plugins: [
 		'prettier-plugin-svelte',
 		'prettier-plugin-css-order',
