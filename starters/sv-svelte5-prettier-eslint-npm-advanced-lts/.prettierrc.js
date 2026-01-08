@@ -4,21 +4,21 @@
 const config = {
 	useTabs: true,
 	singleQuote: true,
-	trailingComma: 'none',
+	trailingComma: 'all' /* default */,
 	printWidth: 80 /* default */,
 	plugins: [
 		'prettier-plugin-svelte',
 		'prettier-plugin-css-order',
-		'prettier-plugin-packagejson'
+		'prettier-plugin-packagejson',
 	],
 	overrides: [
 		{
 			files: '*.svelte',
 			options: {
-				parser: 'svelte'
-			}
-		}
-	]
+				parser: 'svelte',
+			},
+		},
+	],
 };
 
 export default config;
